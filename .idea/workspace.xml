@@ -4,17 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="13c0a3f2-a7bf-4a60-9244-77316e4b38b8" name="Changes" comment="Правки catalogapp">
-      <change afterPath="$PROJECT_DIR$/catalog/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/catalog/admin.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/catalog/apps.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/catalog/models.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/catalog/templates/contacts.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/catalog/templates/home.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/catalog/tests.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/catalog/views.py" afterDir="false" />
+    <list default="true" id="13c0a3f2-a7bf-4a60-9244-77316e4b38b8" name="Changes" comment="Финальный коммит">
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/catalog/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/catalog/urls.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -58,16 +50,16 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "DefaultHtmlFileTemplate": "HTML File",
-    "Python.run.executor": "Run",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "develope",
-    "last_opened_file_path": "/home/cheandrey/PycharmProjects/Web_Django_Project/manage.py",
-    "settings.editor.selected.configurable": "com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;DefaultHtmlFileTemplate&quot;: &quot;HTML File&quot;,
+    &quot;Python.run.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;develope&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/home/cheandrey/PycharmProjects/Web_Django_Project/manage.py&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$" />
@@ -154,13 +146,22 @@
       <option name="project" value="LOCAL" />
       <updated>1725528444980</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="Финальный коммит">
+      <option name="closed" value="true" />
+      <created>1725558258004</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1725558258004</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Правка gitignore" />
     <MESSAGE value="Правки middle" />
     <MESSAGE value="Правки catalogapp" />
-    <option name="LAST_COMMIT_MESSAGE" value="Правки catalogapp" />
+    <MESSAGE value="Финальный коммит" />
+    <option name="LAST_COMMIT_MESSAGE" value="Финальный коммит" />
   </component>
 </project>
