@@ -1,5 +1,5 @@
 from pathlib import Path
-
+import psycopg2
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -58,8 +58,12 @@ WSGI_APPLICATION = 'config.wsgi.application'
 # Database
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'webcatalog',
+        'USER':'db_pilot',
+        'PASSWORD': 'marz2',
+        'HOST':'localhost',
+        'PORT':'5432'
     }
 }
 
@@ -98,3 +102,9 @@ STATICFILES_DIRS = (BASE_DIR / 'static',)
 
 # Default primary key field type
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# часть из урока sky (тема: Модели, Миграции)
+# это "пути" к папкам
+# "медиа" это то, что загружал пользователь в виде фото-картинок, видео и т.д.
+MEDIA_URL = '/media/'# соответственно папка media в корне проекта
+MEDIA_ROOT = BASE_DIR / 'media'
