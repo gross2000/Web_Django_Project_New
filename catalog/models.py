@@ -34,6 +34,7 @@ class Product(models.Model):
     price = models.FloatField()
     created_at = models.DateField()
     updated_at = models.DateField()
+    manufactured_at = models.DateField()
 
     def __str__(self):
         return f"{self.name} {self.description}"
