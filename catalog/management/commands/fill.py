@@ -37,4 +37,4 @@ class Command(BaseCommand):
                     updated_at=product_data['fields']['updated_at']
                 )
 
-        self.stdout.write(self.style.SUCCESS('Данные загружены успешно!'))
+        self.stdout.write(self.style.SUCCESS('Данные загружены успешно!!!'))
