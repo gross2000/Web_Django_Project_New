@@ -27,14 +27,12 @@ class Product(models.Model):
         Category,
         on_delete=models.SET_NULL,
         verbose_name="категория",
-        help_text="Укажите категорию товара",
-        **NULLABLE,
+        help_text="Укажите категорию товара", **NULLABLE,
         related_name="products",
     )
     price = models.FloatField()
     created_at = models.DateField()
     updated_at = models.DateField()
-    manufactured_at = models.DateField()
 
     def __str__(self):
         return f"{self.name} {self.description}"

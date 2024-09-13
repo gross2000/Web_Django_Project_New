@@ -13,4 +13,3 @@ class ProductAdmin(admin.ModelAdmin):
     list_display = ('id', 'name', 'price', 'category')  # Отображаем необходимые поля
     list_filter = ('category',)                          # Добавляем фильтрацию по категории
     search_fields = ('name', 'description')              # Добавляем возможность поиска по имени и описанию продукта
-
