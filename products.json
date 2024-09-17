@@ -1,0 +1,28 @@
+[
+  {
+    "model": "catalog.product",
+    "pk": 1,
+    "fields": {
+      "name": "Смартфон",
+      "description": "Высокотехнологичная продукция",
+      "preview": "",
+      "category": 2,
+      "price": 300.5,
+      "created_at": "2024-09-01",
+      "updated_at": "2024-09-11"
+    }
+  },
+  {
+    "model": "catalog.product",
+    "pk": 2,
+    "fields": {
+      "name": "Диван",
+      "description": "Мягкая мебель",
+      "preview": "",
+      "category": 1,
+      "price": 4.5,
+      "created_at": "2024-09-03",
+      "updated_at": "2024-09-10"
+    }
+  }
+]

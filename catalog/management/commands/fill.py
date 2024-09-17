@@ -10,7 +10,7 @@ class Command(BaseCommand):
         Category.objects.all().delete()
         Product.objects.all().delete()
 
-        with open('sample_data.json', 'r') as file:
+        with open('data.json', 'r') as file:
             data = json.load(file)
             categories = [obj for obj in data if obj.get('model') == 'catalog.category']
             products = [obj for obj in data if obj.get('model') == 'catalog.product']
