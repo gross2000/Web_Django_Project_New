@@ -41,3 +41,41 @@ class Product(models.Model):
         verbose_name = "Продукт"
         verbose_name_plural = "Продукты"
         ordering = ["name", "category"]
+
+
+class Blog(models.Model):
+    title = models.CharField(
+        max_length=100,
+        verbose_name="Заголовок",
+        help_text="Введите заголовок статьи",
+    )
+    text = models.TextField(
+        verbose_name="Текст статьи", help_text="Введите текст статьи"
+    )
+    image = models.ImageField(
+        upload_to="pictures/",
+        blank=True,
+        null=True,
+        verbose_name="Изображение",
+        help_text="Загрузите изображение",
+    )
+    category = models.CharField(
+        verbose_name="Признак публикации",
+        help_text="Введите признак публикации",
+        blank=True,
+        null=True,
+    )
+    created_at = models.DateField(
+        blank=True, null=True, verbose_name="Дата создания записи"
+    )
+    updated_at = models.DateField(
+        blank=True, null=True, verbose_name="Дата изменения записи"
+    )
+
+    class Meta:
+        verbose_name = "Статья"
+        verbose_name_plural = "Статьи"
+        ordering = ["title", "category", "created_at", "updated_at"]
+
+    def __str__(self):
+        return self.title
