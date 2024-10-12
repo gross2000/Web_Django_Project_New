@@ -13,8 +13,8 @@
                   <p class="card-text">{{object.price}} руб.</p>
                   <p class="card-text">{{object.description | truncate_chars}}</p>
                   {%for versions in object.version.all%}
-                  {% if versions.version_sign %}
-                  <p class="card-text">Версия: {{versions.version_number}} Название: {{versions.name}}</p>
+                  {% if versions.is_active %}
+                  <p class="card-text">Версия: {{versions.numder}} Название: {{versions.name}}</p>
                   {% endif %}
                   {% endfor %}
                   <div class="d-flex justify-content-between align-items-center">
@@ -23,7 +23,7 @@
                       <a class="btn btn-outline-success" href="{% url 'catalog:product_update' product.pk %} ">Изменить</a>
                       <a class="btn btn-outline-danger" href="{% url 'catalog:product_delete' product.pk %} ">Удалить</a>
                     </div>
-                      <small class="text-body-secondary">{{object.changes_date}}</small>
+                      <small class="text-body-secondary">{{object.updated_at}}</small>
                     </div>
                   </div>
                 </div>
