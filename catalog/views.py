@@ -39,18 +39,6 @@ class ProductUpdateView(LoginRequiredMixin, UpdateView):
             return self.render_to_response(self.get_context_data(form=form, formset=formset))
 
 
-
-class ProductListView(ListView):
-    model = Product
-
-    def get_context_data(self, *args, object_list=None, **kwargs):
-        context_data = super().get_context_data(**kwargs)
-        for product in context_data['object_list']:
-            active_version = Version.objects.filter(product=product, is_active=True).first()
-            product.active_version = active_version
-        return context_data
-
-
 class ProductCreateView(LoginRequiredMixin, CreateView):
     model = Product
     form_class = ProductForm
@@ -81,14 +69,15 @@ class ProductCreateView(LoginRequiredMixin, CreateView):
             return self.render_to_response(self.get_context_data(form=form, formset=formset))
 
 
+class ProductListView(ListView):
+    model = Product
 
-
-
-
-
-
-
-
+    def get_context_data(self, *args, object_list=None, **kwargs):
+        context_data = super().get_context_data(**kwargs)
+        for product in context_data['object_list']:
+            active_version = Version.objects.filter(product=product, is_active=True).first()
+            product.active_version = active_version
+        return context_data
 
 
 class ProductDetailView(DetailView):
