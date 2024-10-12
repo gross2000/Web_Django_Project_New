@@ -39,6 +39,7 @@ class ProductUpdateView(LoginRequiredMixin, UpdateView):
             return self.render_to_response(self.get_context_data(form=form, formset=formset))
 
 
+
 class ProductListView(ListView):
     model = Product
 
@@ -62,28 +63,6 @@ class ProductDetailView(DetailView):
 
 class ContactsTemplateView(TemplateView):
     template_name = "catalog/contacts.html"
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 # Вариант FBV
