@@ -1,4 +1,7 @@
+from email.policy import default
 from django.db import models
+from django.contrib.auth.models import User
+
 
 NULLABLE = {"blank": True, "null": True}
 
@@ -34,6 +37,9 @@ class Product(models.Model):
     created_at = models.DateField()
     updated_at = models.DateField()
 
+    user = models.ForeignKey(User, verbose_name="Пользователь", blank=True, null=True, on_delete=models.SET_NULL)
+    status = models.BooleanField(default=False,blank=True,null=True)
+
     def __str__(self):
         return f"{self.name} {self.description}"
 
@@ -41,6 +47,26 @@ class Product(models.Model):
         verbose_name = "Продукт"
         verbose_name_plural = "Продукты"
         ordering = ["name", "category"]
+
+
+class Version(models.Model):
+    name = models.CharField(max_length=100, verbose_name='Название')
+    product = models.ForeignKey(
+        Product,
+        on_delete=models.CASCADE,
+        verbose_name="продукт",
+        help_text="Укажите товар", **NULLABLE,
+        )
+    numder = models.FloatField()
+    is_active = models.BooleanField(default=True, verbose_name='Активна')
+
+    def __str__(self):
+        return f'{self.name}'
+
+    class Meta:
+        verbose_name = 'версия'
+        verbose_name_plural = 'версии'
+
 
 
 class Blog(models.Model):
@@ -79,22 +105,3 @@ class Blog(models.Model):
 
     def __str__(self):
         return self.title
-
-
-class Version(models.Model):
-    name = models.CharField(max_length=100, verbose_name='Название')
-    product = models.ForeignKey(
-        Product,
-        on_delete=models.CASCADE,
-        verbose_name="продукт",
-        help_text="Укажите товар", **NULLABLE,
-        )
-    number = models.FloatField()
-    is_active = models.BooleanField(default=True, verbose_name='Активна')
-
-    def __str__(self):
-        return f'{self.name}'
-
-    class Meta:
-        verbose_name = 'версия'
-        verbose_name_plural = 'версии'

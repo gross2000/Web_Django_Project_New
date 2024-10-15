@@ -14,7 +14,7 @@
                   <p class="card-text">{{object.description}}</p>
                   {%for versions in object.version.all%}
                   {% if versions.is_active %}
-                  <p class="card-text">Версия: {{versions.number}} Название: {{versions.name}}</p>
+                  <p class="card-text">Версия: {{versions.numder}} Название: {{versions.name}}</p>
                   {% endif %}
                   {% endfor %}
                   <div class="d-flex justify-content-between align-items-center">

@@ -21,6 +21,8 @@ class ProductForm(StyleFormMixin, ModelForm):
     class Meta:
         model = Product
         fields = "__all__"
+        widgets = {'created_at': forms.DateInput(attrs={'type': 'date', 'format':'yyyy-mm-dd'}),
+                   'updated_at': forms.DateInput(attrs={'type': 'date', 'format': 'yyyy-mm-dd'})}
 
     def clean_name(self):
 
@@ -36,7 +38,7 @@ class ProductForm(StyleFormMixin, ModelForm):
             'радар']
 
         cleaned_data = self.cleaned_data['name']
-        for word in self.forbidden_words:
+        for word in forbidden_words:
             if word in cleaned_data.lower():
                 raise forms.ValidationError('В названии не должно быть запрещенных слов')
         return cleaned_data
@@ -56,7 +58,7 @@ class ProductForm(StyleFormMixin, ModelForm):
             'радар']
 
         cleaned_data = self.cleaned_data['description']
-        for word in self.forbidden_words:
+        for word in forbidden_words:
             if word in cleaned_data.lower():
                 raise forms.ValidationError('В названии не должно быть запрещенных слов')
         return cleaned_data
