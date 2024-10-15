@@ -89,7 +89,7 @@ class Version(models.Model):
         verbose_name="продукт",
         help_text="Укажите товар", **NULLABLE,
         )
-    numder = models.FloatField()
+    number = models.FloatField()
     is_active = models.BooleanField(default=True, verbose_name='Активна')
 
     def __str__(self):

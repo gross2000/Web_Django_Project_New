@@ -13,7 +13,7 @@
                 <div class="card-body">
                   <p class="card-text">{{product.category}}</p>
                   <p class="card-text">{{product.price}} руб.</p>
-                  <p class="card-text">{{product.description | truncate_chars}}</p>
+                  <p class="card-text">{{product.description}}</p>
                   <div class="d-flex justify-content-between align-items-center">
                     <div class="btn-group">
                       <a class="btn btn-outline-primary" href="{%url 'catalog:product_detail' product.pk %}" role="button">Посмотреть</a>

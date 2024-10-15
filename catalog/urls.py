@@ -1,7 +1,8 @@
 from django.urls import path
 from catalog.apps import CatalogConfig
-from catalog.views import ProductListView, ContactsTemplateView, ProductDetailView, ProductCreateView
+from catalog.views import ProductListView, ProductDetailView, ProductCreateView, ProductUpdateView, ProductDeleteView, ContactsTemplateView
 from django.urls import reverse_lazy
+from django.urls import reverse
 from django.conf import settings
 
 from catalog.views import home

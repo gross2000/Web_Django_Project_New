@@ -9,17 +9,18 @@
 
                     {% if object %}
                     <p class="card-text">Редактирование продукта</p>
-                        {% else %}
+                    {% else %}
                     <p class="card-text">Создание продукта</p>
-                        {% endif %}<div class="card-body">
+                    {% endif %}
+                    <div class="card-body">
                         {% csrf_token %}
                         {{ form.as_p }}
                     </div>
                     <button type="submit" class="btn btn-primary">
                         {% if object %}
-                            Редактировать
+                        Редактировать
                         {% else %}
-                            Создать продукт
+                        Создать продукт
                         {% endif %}
                     </button>
                 </div>
