@@ -14,6 +14,11 @@
                   <p class="card-text">{{product.category}}</p>
                   <p class="card-text">{{product.price}} руб.</p>
                   <p class="card-text">{{product.description}}</p>
+                  {%for version in product.versions.all%}
+                  {% if version.is_active %}
+                  <p class="card-text">Версия: {{version.number}}  Название: {{version.name}}</p>
+                  {% endif %}
+                  {% endfor %}
                   <div class="d-flex justify-content-between align-items-center">
                     <div class="btn-group">
                       <a class="btn btn-outline-primary" href="{%url 'catalog:product_detail' product.pk %}" role="button">Посмотреть</a>

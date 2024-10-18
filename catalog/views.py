@@ -75,6 +75,13 @@ class ProductCreateView(LoginRequiredMixin, CreateView):
 class ProductListView(ListView):
     model = Product
 
+    def get_context_data(self, *args, object_list=None, **kwargs):
+        context_data = super().get_context_data(**kwargs)
+        for product in context_data['object_list']:
+            active_version = Version.objects.filter(product=product, is_active=True).first()
+            product.active_version = active_version
+        return context_data
+
 
 class ProductDetailView(DetailView):
     model = Product
@@ -86,7 +93,9 @@ class ContactsTemplateView(TemplateView):
 
 class ProductDeleteView(DeleteView):
     model = Product
-    success_url = reverse_lazy("catalog:index")
+    success_url = reverse_lazy("catalog:product_list")
+
+
 
 ###################################################################################################
 # Вариант FBV

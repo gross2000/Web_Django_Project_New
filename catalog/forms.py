@@ -18,6 +18,18 @@ class StyleFormMixin:
 
 
 class ProductForm(StyleFormMixin, ModelForm):
+
+    forbidden_words = [
+        'казино',
+        'криптовалюта',
+        'крипта',
+        'биржа',
+        'дешево',
+        'бесплатно',
+        'обман',
+        'полиция',
+        'радар']
+
     class Meta:
         model = Product
         fields = "__all__"
@@ -25,40 +37,16 @@ class ProductForm(StyleFormMixin, ModelForm):
                    'updated_at': forms.DateInput(attrs={'type': 'date', 'format': 'yyyy-mm-dd'})}
 
     def clean_name(self):
-
-        forbidden_words = [
-            'казино',
-            'криптовалюта',
-            'крипта',
-            'биржа',
-            'дешево',
-            'бесплатно',
-            'обман',
-            'полиция',
-            'радар']
-
         cleaned_data = self.cleaned_data['name']
-        for word in forbidden_words:
+        for word in self.forbidden_words:
             if word in cleaned_data.lower():
                 raise forms.ValidationError('В названии не должно быть запрещенных слов')
         return cleaned_data
 
 
     def clean_description(self):
-
-        forbidden_words = [
-            'казино',
-            'криптовалюта',
-            'крипта',
-            'биржа',
-            'дешево',
-            'бесплатно',
-            'обман',
-            'полиция',
-            'радар']
-
         cleaned_data = self.cleaned_data['description']
-        for word in forbidden_words:
+        for word in self.forbidden_words:
             if word in cleaned_data.lower():
                 raise forms.ValidationError('В названии не должно быть запрещенных слов')
         return cleaned_data
