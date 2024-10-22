@@ -23,8 +23,10 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'catalog',
-    'blog'
+    'blog',
+    'users',
 ]
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -110,3 +112,16 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # "медиа" это то, что загружал пользователь в виде фото-картинок, видео и т.д.
 MEDIA_URL = '/media/'# соответственно папка media в корне проекта
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+
+AUTH_USER_MODEL = 'users.User'
+LOGIN_REDIRECT_URL = '/'
+LOGOUT_REDIRECT_URL = '/'
+EMAIL_HOST = 'smtp.yandex.ru'
+EMAIL_PORT = 465
+EMAIL_HOST_USER = "glavpostamt@yandex.ru"
+EMAIL_HOST_PASSWORD = "iurjfhnfmcjkhd"
+EMAIL_USE_TLS = True
+EMAIL_USE_SSL = False
+SERVER_EMAIL = EMAIL_HOST_USER
+DEFAULT_FROM_EMAIL = EMAIL_HOST_USER

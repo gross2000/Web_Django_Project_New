@@ -1,3 +1,5 @@
+from django.conf import settings
+from django.contrib.auth import get_user_model
 from email.policy import default
 from django.db import models
 from django.contrib.auth.models import User
@@ -37,6 +39,7 @@ class Product(models.Model):
     created_at = models.DateField(auto_now_add=True)
     updated_at = models.DateField(auto_now=True)
 
+    User = get_user_model()  # Получаем текущую модель пользователя
     user = models.ForeignKey(User, verbose_name="Пользователь", blank=True, null=True, on_delete=models.SET_NULL)
     status = models.BooleanField(default=False,blank=True,null=True)
 
