@@ -1,19 +1,22 @@
-from django.shortcuts import render
 import secrets
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.views import PasswordResetView
 from django.core.mail import send_mail
 from django.shortcuts import get_object_or_404, redirect
 from django.urls import reverse_lazy, reverse
-from django.views.generic import CreateView
-from users.forms import UserRegisterForm
-from users.models import User
+from django.views.generic import CreateView, UpdateView, TemplateView
+
 from config.settings import EMAIL_HOST_USER
+from catalog.views import UserLoginRequiredMixin
+from users.forms import UserRegisterForm, ProfileForm, ResetPasswordForm
+from users.models import User
 
-# Create your views here.
 
-class UserCreateView(CreateView):
+class RegisterView(CreateView):
     model = User
     form_class = UserRegisterForm
-    success_url = reverse_lazy('users:login')
+    template_name = "users/register.html"
+    success_url = reverse_lazy("users:login")
 
     def form_valid(self, form):
         user = form.save()
@@ -22,14 +25,23 @@ class UserCreateView(CreateView):
         user.token = token
         user.save()
         host = self.request.get_host()
-        url = f'http://{host}/users/email-confirm/{token}/'
+        url = f"http://{host}/users/email-confirm/{token}/"
         send_mail(
             subject="Подтверждение почты",
-            message=f"Привет! Перейди по ссылке для подтверждения почты {url}",
+            message=f"Перейдите по ссылке для подтверждения {url}",
             from_email=EMAIL_HOST_USER,
-            recipient_list=[user.email]
+            recipient_list=[user.email],
         )
         return super().form_valid(form)
+
+
+class ProfileView(LoginRequiredMixin, UpdateView):
+    model = User
+    form_class = ProfileForm
+    success_url = reverse_lazy("catalog:product_list")
+
+    def get_object(self, queryset=None):
+        return self.request.user
 
 
 def email_verification(request, token):
@@ -37,3 +49,31 @@ def email_verification(request, token):
     user.is_active = True
     user.save()
     return redirect(reverse("users:login"))
+
+
+class UserResetPasswordView(UserLoginRequiredMixin, PasswordResetView):
+    form_class = ResetPasswordForm
+    template_name = "users/reset_password.html"
+    success_url = reverse_lazy("users:login")
+
+    def form_valid(self, form):
+        email = form.cleaned_data["email"]
+        try:
+            user = User.objects.get(email=email)
+            if user:
+                password = User.objects.make_random_password(length=10)
+                user.set_password(password)
+                user.save()
+                send_mail(
+                    subject="Сброс пароля",
+                    message=f" Ваш новый пароль {password}",
+                    from_email=EMAIL_HOST_USER,
+                    recipient_list=[user.email],
+                )
+            return redirect(reverse("users:login"))
+        except:
+            return redirect(reverse("users:wrong_email"))
+
+
+class NotMailPageView(UserLoginRequiredMixin, TemplateView):
+    template_name = "users/wrong_email.html"

@@ -52,6 +52,14 @@ class ProductForm(StyleFormMixin, ModelForm):
         return cleaned_data
 
 
+class ModeratorProductForm(StyleFormMixin, ModelForm):
+    class Meta:
+        model = Product
+        fields = ('description', 'category', 'status',)
+        widgets = {
+            'status': forms.CheckboxInput(),
+        }
+
 
 class VersionForm(StyleFormMixin, ModelForm):
     class Meta:

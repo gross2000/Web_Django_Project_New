@@ -1,0 +1,71 @@
+{% extends 'catalog/products.html' %}
+{% load image_tags %}
+{% block content %}
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="d-flex justify-content-start mb-4">
+                <a href="?" class="btn btn-custom me-2">Все категории</a>
+                {% for category in categories %}
+                <a href="?category={{ category.id }}{% if page_obj.has_other_pages %}&page={{ page_obj.number }}{% endif %}"
+                   class="btn btn-custom me-2">
+                    {{ category.name }}
+                </a>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        {% for prodset in page_obj %}
+        <div class="col-md-6 mb-3">
+            <div class="card text-bg-light mb-3" style="height: 100%;">
+                <div class="row g-0">
+                    <div class="col-md-3">
+                        {% if prodset.image %}
+                        {% render_image prodset.image.url prodset.name 'img-fluid rounded-start' %}
+                        {% endif %}
+                    </div>
+                    <div class="col-md-8">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ prodset.name }}</h5>
+                            <p class="card-text">
+                                {{ prodset.description|safe|slice:':100' }}
+                                {% if prodset.description|length > 100 %}...{% endif %}
+                            </p>
+                            <p class="card-text"><strong>Цена:</strong> {{ prodset.price }} ₽</p>
+                            <div class="col-12">
+                                <div class="card-body">
+                                    <a class="btn btn-custom m-2"
+                                       href="{% url 'catalog:product_detail' pk=prodset.id %}">Узнать больше</a>
+                                    {% if user == prodset.user or perms.catalog.can_delete_product%}
+                                    <a class="btn btn-custom m-2"
+                                       href="{% url 'catalog:update_product' pk=prodset.id %}">Изменить</a>
+                                    {% elif perms.catalog.can_change_product_description and
+                                    perms.catalog.can_change_product_status and
+                                    perms.catalog.can_change_product_category %}
+                                    <a class="btn btn-custom m-2"
+                                       href="{% url 'catalog:moderator_update_product' pk=prodset.id %}">Изменить</a>
+                                    {% endif %}
+                                    {% if user == prodset.user or perms.catalog.can_delete_product %}
+                                    <a class="btn btn-custom m-2"
+                                       href="{% url 'catalog:delete_product' pk=prodset.id %}">Удалить</a>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                        <p class="card-footer">
+                            Актуальная версия продукта:
+                            {% if prodset.active_version %}
+                            {{ prodset.active_version }}
+                            {% else %}
+                            Неизвестно
+                            {% endif %}
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endfor %}
+{% endblock %}

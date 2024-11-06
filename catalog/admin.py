@@ -1,15 +1,24 @@
 from django.contrib import admin
-from catalog.models import Product, Category
+from django.contrib.admin import ModelAdmin
 
-# Админка для модели Category
+from catalog.models import Category, Product, Version
+
+
+# Register your models here.
 @admin.register(Category)
 class CategoryAdmin(admin.ModelAdmin):
-    list_display = ('id', 'name')  # Указываем, какие поля отображать в списке
-    search_fields = ('name',)       # Добавляем возможность поиска по имени категории
+    list_display = ("id", "name",)
 
-# Админка для модели Product
+
 @admin.register(Product)
 class ProductAdmin(admin.ModelAdmin):
-    list_display = ('id', 'name', 'price', 'category')  # Отображаем необходимые поля
-    list_filter = ('category',)                          # Добавляем фильтрацию по категории
-    search_fields = ('name', 'description')              # Добавляем возможность поиска по имени и описанию продукта
+    list_display = ("id", "name", "price", "category")
+    list_filter = ("category", )
+    search_fields = ("name", "description",)
+
+
+@admin.register(Version)
+class VersionAdmin(ModelAdmin):
+    list_display = ("id", "product", "name", "number", "is_active")
+    list_filter = ("product",)
+    search_fields = ("product", "number",)

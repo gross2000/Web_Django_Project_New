@@ -41,7 +41,9 @@ class Product(models.Model):
 
     User = get_user_model()  # Получаем текущую модель пользователя
     user = models.ForeignKey(User, verbose_name="Пользователь", blank=True, null=True, on_delete=models.SET_NULL)
+
     status = models.BooleanField(default=False,blank=True,null=True)
+
 
     def __str__(self):
         return f"{self.name} {self.description}"
@@ -49,7 +51,12 @@ class Product(models.Model):
     class Meta:
         verbose_name = "Продукт"
         verbose_name_plural = "Продукты"
-        ordering = ["name", "category"]
+        ordering = ["name", "category", 'price', 'created_at']
+        permissions = [
+            ("can_change_status", "Can change status"),
+            ("can_edit_description", "Can edit description"),
+            ("can_edit_category", "Can edit category"),
+        ]
 
 
 class Version(models.Model):
