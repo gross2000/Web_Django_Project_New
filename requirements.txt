@@ -21,3 +21,4 @@ traitlets==5.14.3
 wcwidth==0.2.13
 psycopg2-binary==2.9.9
 ipython==8.27.0
+redis==5.2.0

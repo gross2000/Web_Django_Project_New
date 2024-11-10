@@ -3,11 +3,12 @@ from django.shortcuts import render, get_object_or_404
 from django.urls import reverse
 from django.urls import reverse_lazy
 from catalog.forms import ProductForm, VersionForm, ModeratorProductForm
-from catalog.models import Product, Version
+from catalog.models import Product, Version, Category
 from django.views.generic import TemplateView, DetailView, ListView, CreateView, UpdateView, DeleteView
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 from django.forms import inlineformset_factory
 from django.core.exceptions import PermissionDenied
+from catalog.services import get_categories_from_cache
 
 
 # Create views here
@@ -147,6 +148,13 @@ class ModeratorProductUpdateView(PermissionRequiredMixin, LoginRequiredMixin, Up
     def get_object(self, queryset=None):
         obj = super().get_object(queryset)
         return obj
+
+
+class CategoryListView(ListView):
+    model = Category
+
+    def get_queryset(self):
+        return get_categories_from_cache()
 
 ###################################################################################################
 # Вариант FBV
